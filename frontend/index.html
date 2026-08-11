@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Assistant AI</title>
+    <meta name="description" content="A premium AI assistant powered by Retrieval-Augmented Generation">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i data-feather="cpu" class="logo-icon"></i>
+                <h1>Nexus RAG</h1>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-item active" id="tab-chat">
+                    <i data-feather="message-square"></i>
+                    <span>Chat Assistant</span>
+                </div>
+                <div class="nav-item" id="tab-kb">
+                    <i data-feather="database"></i>
+                    <span>Knowledge Base</span>
+                </div>
+                <div class="nav-item">
+                    <i data-feather="settings"></i>
+                    <span>Settings</span>
+                </div>
+            </div>
+            
+            <div class="system-status">
+                <div class="status-indicator"></div>
+                <span>Backend Connected</span>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-container">
+            <header class="chat-header">
+                <h2>AI Assistant</h2>
+                <p>Ask anything about your documents</p>
+            </header>
+
+            <div class="messages-area" id="messages-area">
+                
+                <!-- Welcome Message -->
+                <div class="message assistant-message intro-message">
+                    <div class="avatar">
+                        <i data-feather="bot"></i>
+                    </div>
+                    <div class="message-content">
+                        <h3>Welcome to Nexus AI!</h3>
+                        <p>I am your Retrieval-Augmented Generation assistant. I can answer questions based on your provided knowledge base.</p>
+                        <div class="suggestion-chips">
+                            <button class="chip" onclick="fillInput('What is the main topic of the documents?')">What is the main topic of the documents?</button>
+                            <button class="chip" onclick="fillInput('Summarize the latest findings.')">Summarize the latest findings.</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-container">
+                <form id="chat-form" class="chat-form">
+                    <input type="text" id="chat-input" placeholder="Ask a question..." autocomplete="off">
+                    <button type="submit" id="send-btn" class="send-btn">
+                        <i data-feather="send"></i>
+                    </button>
+                </form>
+                <div class="input-footer">
+                    Powered by local RAG engine. Model can make mistakes.
+                </div>
+            </div>
+        </main>
+
+        <!-- Knowledge Base Area -->
+        <main class="kb-container hidden" id="kb-view">
+            <header class="chat-header">
+                <h2>Knowledge Base</h2>
+                <p>Manage your documents and data sources</p>
+            </header>
+
+            <div class="kb-content">
+                <div class="upload-section">
+                    <h3>Upload New Document</h3>
+                    <p>Only .txt files are supported at this time.</p>
+                    <form id="upload-form" class="upload-form">
+                        <div class="file-drop-area" id="file-drop-area">
+                            <i data-feather="upload-cloud" class="upload-icon"></i>
+                            <span class="file-msg">Drag & drop your .txt file here or click to browse</span>
+                            <input type="file" id="file-input" accept=".txt" required>
+                        </div>
+                        <button type="submit" id="upload-btn" class="btn-primary" disabled>
+                            Upload Document
+                        </button>
+                    </form>
+                    <div id="upload-status" class="upload-status"></div>
+                </div>
+
+                <div class="documents-section">
+                    <h3>Uploaded Documents</h3>
+                    <div id="documents-list" class="documents-list">
+                        <!-- Document cards will be inserted here -->
+                        <div class="loading-docs">Loading documents...</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
